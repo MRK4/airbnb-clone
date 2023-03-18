@@ -1,6 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import BookingWidget from "../BookingWidget";
+import PlaceGallery from "../PlaceGallery";
+import AddressLink from "../AddressLink";
 
 export default function PlacePage() {
   const { id } = useParams();
@@ -19,33 +22,32 @@ export default function PlacePage() {
   return (
     <div className="-mx-8 px-8 mt-4 py-8 bg-gray-100">
       <h1 className="text-3xl">{place.title}</h1>
-      <a target="_blank" href={'https://maps.google.com/?q='+place.address} className="block font-semibold underline my-2">{place.address}</a>
-      <div className="relative">
-        <div className="grid gap-2 grid-cols-[2fr_1fr]">
-            <div>
-                {place.photos?.[0] && (
-                    <div className="">
-                        <img className="aspect-square object-cover w-full h-full" src={'http://localhost:4000/uploads/'+place.photos[0]} alt="" />
-                    </div>
-                )}
-            </div>
-            <div className="grid">
-                {place.photos?.[1] && (
-                    <img className="aspect-square object-cover w-full h-full" src={'http://localhost:4000/uploads/'+place.photos[1]} alt="" />
-                )}
-                <div className="overflow-hidden">
-                    {place.photos?.[2] && (
-                        <img className="relative top-2 aspect-square object-cover w-full h-full" src={'http://localhost:4000/uploads/'+place.photos[2]} alt="" />
-                    )}
-                </div>
-            </div>
+      <AddressLink>{place.address}</AddressLink>
+      <PlaceGallery place={place} />
+      <div className="my-4">
+        <h2 className="font-semibold text-2xl">About de place...</h2>
+        <p className="text-gray-700">{place.description}</p>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr]">
+        <div className="grid grid-cols-3 justify-center items-center">
+          <span>
+            <h2 className="font-bold">Check In</h2>
+            <p className="text-gray-700">{place.checkIn}pm</p>
+          </span>
+          <span>
+            <h2 className="font-bold">Check Out</h2>
+            <p className="text-gray-700">{place.checkOut}pm</p>
+          </span>
+          <span>
+            <h2 className="font-bold">Place max guests</h2>
+            <p className="text-gray-700">{place.maxGuests}</p>
+          </span>
         </div>
-        <button className="flex items-center gap-1 absolute bottom-2 right-2 py-2 px-4 bg-white rounded-xl shadow-md shadow-gray-500">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
-                <path fillRule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clipRule="evenodd" />
-            </svg>
-            Show more photos
-        </button>
+        <BookingWidget place={place} />
+      </div>
+      <div className="border-t-2 border-primary bg-white -mx-8 px-8 py-4 my-4">
+        <h2 className="font-semibold text-2xl">Extra Info</h2>
+        <p className="text-gray-700">{place.extraInfo}</p>
       </div>
     </div>
   );
