@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <header className="flex justify-between items-center">
       {/* Left */}
-      <Link to={'/'} className="flex items-center gap-1">
+      <Link to={'/'} className="transition flex items-center gap-1 hover:text-primary">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
