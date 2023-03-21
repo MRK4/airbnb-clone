@@ -14,9 +14,9 @@ const IndexPage = () => {
     <div className="mt-8 grid gap-x-6 gap-y-8 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
       {places.length > 0 && places.map(place => (
         <Link to={'/place/'+place._id}>
-          <div className="mb-2 rounded-2xl bg-gray-500 flex">
+          <div className="group mb-2 rounded-2xl bg-gray-500 flex">
             {place.photos?.[0] && (
-              <Image className="aspect-square object-cover rounded-2xl" src={place.photos?.[0]} alt="" />
+              <Image className="transition group-hover:brightness-105 aspect-square object-cover rounded-2xl" src={place.photos?.[0]} alt="" />
             )}
           </div>
           <h2 className="font-bold">{place.address}</h2>
